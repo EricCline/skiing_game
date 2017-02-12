@@ -5,40 +5,22 @@ import time
 
 
 class Line(object):
+    """Stores a pair of edge positions and can generate an appropriately
+    sized string from them"""
 
-    EDGE = "!"
-
-    def __init__(self, gutter):
-        self._gutter = gutter
-        self._generate()
-
-    def _generate(self):
-        self._identity = "{gutter}{edge}{middle}{edge}".format(
-            gutter=self._gutter * " ",
-            edge=self.EDGE,
-            middle=" " * 10,
-        )
-
-    @property
-    def left_edge(self):
-        return self._gutter + 1
-
-    def __repr__(self):
-        return self._identity
+    def __init__(self, left, right):
+        self.lx self.ly = left
+        self.rx self.ry = right
 
     def __str__(self):
-        return self._identity
+        return " " * (self.rx - self.lx)
 
-    def set_player(self, status):
-        self._player = status
-        self._generate()
-        
 
 class Course(object):
+    """Generates and stores a screen's worth of edge positions"""
 
     def __init__(self):
         self._width, self._height = curses.COLS, curses.LINES
-        self._gutter = 5
         self._course = queue.deque(maxlen=self._height)
         self._populate()
 
@@ -49,9 +31,8 @@ class Course(object):
             self._new_gutter()
 
     def evolve(self):
-        self._course.popleft()                                                   # throw away top line
-        self._new_gutter()                                                       # calculate new gutter
-        self._course.append(Line(self._gutter))                                  # add new line
+        self._course.popleft()
+        self._course.append(Line(self._gutter))  # append something
         return self
 
     def get_line(self, index):
