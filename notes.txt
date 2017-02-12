@@ -1,0 +1,32 @@
+== The Skiing Game == 
+
+* Sides of course made of /\|
+* Skier is an H
+* Skier appears at least halfway up the screen
+* Jumps are denoted by a ----------------- and a break in the sides of the course
+
+
+* Controls consists of Left and Right Arrow, Space Bar for pause, typing for high score names, and Return to begin
+
+
+Features:
+* High score system
+    * ability to store high scores
+    * ability to store name with the high score (three letters?  :) )
+* Being able to draw a screen's worth of the course at a time
+  * need to store in memory the last screen's height worth of course  (basic stack with push pop?)
+* Game loop
+  * Can draw generated course with appropriate speed
+  * Can draw the player icon in the same row of the screen each time
+  * Registers control inputs for player movement
+  * Registers pause from space bar
+  * Can draw the player in the correct position after input
+  * Registers player impact with course wall
+  * Has exit condition
+
+Nice to haves:
+  * Colors!
+  * Beep sound for crash
+  * Splash screen
+  * Catchy name
+
