@@ -107,9 +107,9 @@ class Player(object):
         return "H"
         
 
-def main(stdscr):
+def main(screen):
     curses.curs_set(False)
-    stdscr.nodelay(True)
+    screen.nodelay(True)
     course = Course()
     start_y = int(curses.LINES / 2)
     start_x = course.get_line(start_y).lx + 5
@@ -118,7 +118,7 @@ def main(stdscr):
 
     current_time = time.time()
     while True:
-        key_down = stdscr.getch()
+        key_down = screen.getch()
         if key_down == ord('q'):
             break
         if not player.is_crashed(course):
@@ -127,14 +127,14 @@ def main(stdscr):
                 distance += 1
                 current_time = new_time
                 course.evolve()
-                stdscr.clear()
-                [stdscr.addstr(line.y, line.lx, str(line)) for line in course.lines]
+                screen.clear()
+                [screen.addstr(line.y, line.lx, str(line)) for line in course.lines]
             player.update(key_down)
-            stdscr.addch(player.y, player.x, str(player))
-            stdscr.refresh()
+            screen.addch(player.y, player.x, str(player))
+            screen.refresh()
         else:
-            stdscr.addstr(player.y, player.x + 1, "<------------ You died here! But you made it {} feet!".format(distance))
-            stdscr.refresh()
+            screen.addstr(player.y, player.x + 1, "<------------ You died here! But you made it {} feet!".format(distance))
+            screen.refresh()
 
 
 if __name__ == '__main__':
